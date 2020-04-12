@@ -3,5 +3,5 @@
 
 <br>
 
-<img src="../EcoRingPanel.png">
+<img src="./EcoRingPanel.png">
 
