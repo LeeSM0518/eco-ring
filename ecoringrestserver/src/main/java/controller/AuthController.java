@@ -1,21 +1,26 @@
 package controller;
 
+import command.LoginRequest;
 import dto.Member;
 import mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import service.AuthService;
 
 import java.util.List;
 
 @RestController
-public class TestController {
+public class AuthController {
 
   @Autowired
-  private MemberMapper memberMapper;
+  private AuthService authService;
 
-  @GetMapping("/test")
-  public String test() {
+  @PostMapping("/auth/login")
+  public String login(@RequestBody LoginRequest request) {
+
     return "test";
   }
 
