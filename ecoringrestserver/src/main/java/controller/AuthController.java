@@ -2,6 +2,8 @@ package controller;
 
 import command.LoginRequest;
 import dto.Member;
+import error.MemberNotFoundException;
+import error.WrongPasswordException;
 import mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,14 +21,14 @@ public class AuthController {
   private AuthService authService;
 
   @PostMapping("/auth/login")
-  public String login(@RequestBody LoginRequest request) {
-
-    return "test";
-  }
-
-  @GetMapping("/members")
-  public List<Member> members() {
-    return memberMapper.selectList();
+  public Member login(@RequestBody LoginRequest request) {
+    try {
+      return authService.login(request.getEmail(), request.getPassword());
+    } catch (MemberNotFoundException memberNotFoundException) {
+      throw new MemberNotFoundException();
+    } catch (WrongPasswordException wrongPasswordException) {
+      throw new WrongPasswordException();
+    }
   }
 
 }

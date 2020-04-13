@@ -47,4 +47,9 @@ public class Member {
   public void setAuthority(String authority) {
     this.authority = authority;
   }
+
+  public boolean matchPassword(String password) {
+    return this.password.equals(password);
+  }
+
 }
