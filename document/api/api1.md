@@ -7,8 +7,11 @@
 ### login
 
 * **POST /auth/login**
-  * 데이터: email(이메일), password(비밀번호)
-  * 성공 시, Session에 회원 정보를 담는다.
+  * 수신 데이터: email(이메일), password(비밀번호)
+  * 송신 데이터
+    * 성공 시: id(아이디), name(이름), email(이메일), password(비밀번호), authority(권한)
+    * 실패 시: message(오류 메시지)
+  * 성공 시, Session에 회원 정보를 담고 조회한 데이터 반환
   * 실패 시, 결과 코드 및 메시지 반환
 
 <br>
@@ -16,7 +19,8 @@
 ### logout
 
 * **POST /auth/logout**
-  * 데이터: email(이메일), password(비밀번호)
+  * 수신 데이터: email(이메일), password(비밀번호)
+  * 송신 데이터: 
   * 성공 시, Session에서 회원 정보를 지운다.
   * 실패 시, 결과 코드 및 메시지 반환
 

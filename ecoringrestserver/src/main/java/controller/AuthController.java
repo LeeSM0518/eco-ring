@@ -24,5 +24,4 @@ public class TestController {
     return memberMapper.selectList();
   }
 
-  @Mapping
 }
