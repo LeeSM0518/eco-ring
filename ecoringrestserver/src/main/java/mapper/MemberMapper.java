@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface MemberMapper {
 
-  @Select("select * from member where email=#{email} and password=#{password}")
-  Member selectOne(@Param("email") String email, @Param("password") String password);
+  @Select("select * from member where email=#{email}")
+  Member selectOne(@Param("email") String email);
 
 }

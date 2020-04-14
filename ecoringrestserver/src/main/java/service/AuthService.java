@@ -12,12 +12,12 @@ public class AuthService {
   private MemberMapper memberMapper;
 
   public Member login(String email, String password) {
-    Member member = memberMapper.selectOne(email, password);
+    Member member = memberMapper.selectOne(email);
     if (member == null) {
-      throw new WrongPasswordException();
+      throw new MemberNotFoundException();
     }
     if (!member.matchPassword(password)) {
-      throw new MemberNotFoundException();
+      throw new WrongPasswordException();
     }
 
     return member;
