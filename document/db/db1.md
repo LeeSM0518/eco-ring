@@ -65,11 +65,11 @@
 
   ```sql
   create table DEVICE (
-    device_id serial primary key,
+    id serial primary key,
     latitude double precision,
     longitude double precision,
     address text,
-    created_date timestamp
+    createdDate timestamp
   );
   ```
 
@@ -77,12 +77,12 @@
 
   ```sql
   create table DUST (
-    dust_id serial primary key,
+    id serial primary key,
     density integer,
-    measured_date timestamp,
+    measuredDate timestamp,
     severity text,
-    measured_device_id integer,
-    foreign key (measured_device_id) references device (device_id)
+    measuredDeviceId integer,
+    foreign key (measuredDeviceId) references device (id)
   );
   ```
 
@@ -90,7 +90,7 @@
 
   ```sql
   create table MEMBER (
-    member_id serial primary key,
+    id serial primary key,
     name text,
     email text,
     password text,
