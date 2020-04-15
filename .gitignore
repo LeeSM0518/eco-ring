@@ -249,5 +249,5 @@ Temporary Items
 .history
 
 # End of https://www.gitignore.io/api/git,macos,intellij,intellij+all,intellij+iml,visualstudiocode
-ecoringrestserver/.gradle/*
-ecoringrestserver/build/*
+/.gradle/*
+/build/*
