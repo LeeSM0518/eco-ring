@@ -1,7 +1,9 @@
 package controller;
 
 import command.LoginRequest;
+import command.SignUpRequest;
 import dto.Member;
+import error.DuplicateEmailException;
 import error.MemberNotFoundException;
 import error.WrongPasswordException;
 import mapper.MemberMapper;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import service.AuthService;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @RestController
@@ -21,13 +24,29 @@ public class AuthController {
   private AuthService authService;
 
   @PostMapping("/auth/login")
-  public Member login(@RequestBody LoginRequest request) {
+  public Member login(@RequestBody LoginRequest request, HttpSession session) {
     try {
-      return authService.login(request.getEmail(), request.getPassword());
+      Member member = authService.login(request.getEmail(), request.getPassword());
+      session.setAttribute("loginMember", member);
+      return member;
     } catch (MemberNotFoundException memberNotFoundException) {
       throw new MemberNotFoundException();
     } catch (WrongPasswordException wrongPasswordException) {
       throw new WrongPasswordException();
+    }
+  }
+
+  @PostMapping("/auth/logout")
+  public void logout(HttpSession session) {
+    session.invalidate();
+  }
+
+  @PostMapping("/auth/signup")
+  public void signUp(@RequestBody SignUpRequest request) {
+    try {
+      authService.signUp(request.getName(), request.getEmail(), request.getPassword());
+    } catch (DuplicateEmailException exception) {
+      throw new DuplicateEmailException();
     }
   }
 

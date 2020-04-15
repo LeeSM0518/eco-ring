@@ -1,10 +1,14 @@
 package service;
 
 import dto.Member;
+import error.DuplicateEmailException;
 import error.MemberNotFoundException;
 import error.WrongPasswordException;
 import mapper.MemberMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.servlet.http.HttpSession;
 
 public class AuthService {
 
@@ -21,6 +25,15 @@ public class AuthService {
     }
 
     return member;
+  }
+
+  @Transactional
+  public void signUp(String name, String email, String password) {
+    Member member = memberMapper.selectOne(email);
+    if (member != null) {
+      throw new DuplicateEmailException();
+    }
+    memberMapper.insertUser(name, email, password);
   }
 
 }
