@@ -58,7 +58,6 @@
 ### logout
 
 * **POST /auth/logout**
-  * 수신 데이터: email(이메일), password(비밀번호)
   * 송신 데이터
     * 성공 시:  Session에서 정보 삭제 후 `200` 반환
 
@@ -78,24 +77,24 @@
 
 * **GET /devices**
   * 송신 데이터
-    * 성공 시: deviceId(디바이스 번호), latitude(위도), longitude(경도), address(주소), createdDate(만든 날짜) 및 `200` 반환
+    * 성공 시: id(디바이스 번호), latitude(위도), longitude(경도), address(주소), createdDate(만든 날짜) 및 `200` 반환
 * **POST /devices**
   * 수신 데이터: latitude(위도), longitude(경도), address(주소) 와 `201` 반환
   * 송신 데이터
     * 성공 시: deviceId(디바이스 번호) 와 `201` 반환
-    * 실패 시: 위도, 경도가 중복되거나 주소가 중복될 경우 `400` 반환
+    * 실패 시: 주소가 중복될 경우 `400` 반환
 * **GET /devices/:id**
   * 수신 데이터: deviceId(디바이스 번호)
   * 송신 데이터
     * 성공 시: latitude(위도), longitude(경도), address(주소), createdDate(만든 날짜) 와 `200` 반환
     * 실패 시: 없는 디바이스 번호일 경우 `404` 반환
 * **PUT /devices/:id**
-  * 수신 데이터: deviceId(디바이스 번호), latitude(위도), longitude(경도), address(주소)
+  * 수신 데이터: id(디바이스 번호), latitude(위도), longitude(경도), address(주소)
   * 송신 데이터
     * 성공 시: `201` 반환
     * 실패 시: 동일한 디바이스 번호가 존재하지 않으면 `404` 반환
 * **DELETE /devices/:id**
-  * 수신 데이터: deviceId(디바이스 번호)
+  * 수신 데이터: id(디바이스 번호)
   * 송신 데이터
     * 성공 시: `200` 반환
     * 실패 시: 동일한 디바이스 번호가 존재하지 않으면 `404` 반환
@@ -105,10 +104,11 @@
 ## dust(미세먼지)
 
 * **GET /devices/dust**
-  * 송신 데이터: deviceId(디바이스 번호), latitude(위도), longitude(경도), address(주소), density(농도) 와 measuredDate(최근 측정한 날짜), severity(심각도) 및 `200` 반환
+  * 송신 데이터: id(디바이스 번호), latitude(위도), longitude(경도), address(주소), density(농도) 와 measuredDate(최근 측정한 날짜), severity(심각도) 및 `200` 반환
+    * 각 디바이스 마다 최근에 측정한 값만 가져온다.
   * 디바이스와 미세먼지를 JOIN하여 데이터들을 가져온다.
 * **POST /devices/dust**
-  * 수신 데이터: deviceId(디바이스 번호), density(농도)
+  * 수신 데이터: id(디바이스 번호), density(농도)
   * severity(심각도)는 전송된 density(농도)로부터 계산하여 저장하고, measuredDate 컬럼은 현재 시간으로 할당하고 dustId(먼지 식별자)는 DEFAULT로 추가한다.
   * 송신 데이터
     * 성공 시: `200` 반환
