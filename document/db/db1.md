@@ -11,22 +11,22 @@
 ## 명명
 
 * **디바이스(Device)**
-  * 번호(device_id)
+  * 번호(id)
   * 위도(latitude)
   * 경도(longitude)
   * 주소(address)
-  * 생성 날짜(created_date)
+  * 생성 날짜(createdDate)
 * **회원(Member)**
-  * 번호(member_id)
+  * 번호(id)
   * 이름(name)
   * 이메일(email)
   * 비밀번호(password)
   * 권한(authority)
 * **미세먼지(Dust)**
-  * 번호(dust_id)
+  * 번호(id)
   * 농도(density)
-  * 측정한 디바이스 번호(measured_device_id)
-  * 측정한 날짜(measured_date)
+  * 측정한 디바이스 번호(measuredDeviceId)
+  * 측정한 날짜(measuredDate)
   * 심각도(severity)
 
 <br>
