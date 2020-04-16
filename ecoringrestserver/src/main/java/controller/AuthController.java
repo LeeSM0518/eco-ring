@@ -27,7 +27,7 @@ public class AuthController {
   public Member login(@RequestBody LoginRequest request, HttpSession session) {
     try {
       Member member = authService.login(request.getEmail(), request.getPassword());
-      session.setAttribute("loginMember", member);
+      session.setAttribute(member.getEmail(), member);
       return member;
     } catch (MemberNotFoundException memberNotFoundException) {
       throw new MemberNotFoundException();
@@ -37,6 +37,7 @@ public class AuthController {
   }
 
   @PostMapping("/auth/logout")
+  // TODO 이메일을 수신받아서 이메일로 session에서 attribute를 제거
   public void logout(HttpSession session) {
     session.invalidate();
   }
